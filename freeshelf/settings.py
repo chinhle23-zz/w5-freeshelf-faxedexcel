@@ -14,6 +14,10 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+    # 'MEDIA_ROOT' defined as the full path directory where you'd like Django to store uploaded files
+MEDIA_URL = '/media/'
+    # 'MEDIA_URL' defined as the base public URL of that directory
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,13 +35,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # built-in apss
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'freeshelfapp.apps.FreeshelfappConfig',
+
+    # my apps
+    # 'freeshelfapp.apps.FreeshelfappConfig', # MDN tutorial way and it works
+    'freeshelfapp', # Clinton's way and it works as well
+
+    # 3rd-party apps
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'freeshelf.urls'

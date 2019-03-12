@@ -8,9 +8,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name',)
+    list_display = ('name',)
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'date_added',)
+    list_display = ('title', 'date_added', 'display_author', 'display_category')
     list_filter = ('date_added', 'author',)
