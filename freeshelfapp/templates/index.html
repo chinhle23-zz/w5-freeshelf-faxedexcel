@@ -6,7 +6,7 @@
     {% if categories %}
     <span class="category_nav">
         {% for category in categories %}
-            <a href="">{{ category }}</a> |
+            <a href="{{ category.get_absolute_url }}">{{ category }}</a> |
         {% endfor %}
     </span>
     {% else %}
@@ -30,7 +30,11 @@
         <section class="favorite_date">
           <span class="favorite">Favorited {{ books.count }} times | </span>
           <span>added {{ book.date_added }} | </span>
-          <span class="book_category">Category: <a href="">{{ book.display_category }}</a></span>
+          <span class="book_category">Category: 
+            {% for category in book.category_set.all %}
+              <a href="{{ category.get_absolute_url }}">{{ category }}</a> |
+            {% endfor %}
+          </span>
         </section>
       {% endfor %}
     {% else %}

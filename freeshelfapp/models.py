@@ -34,7 +34,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a particular category instance."""
-        return reverse('category-detail', args=[str(self.id)])
+        return reverse('category-detail', args=[str(self.slug)])
     
     def __str__(self):
         """String for representing the Model object."""

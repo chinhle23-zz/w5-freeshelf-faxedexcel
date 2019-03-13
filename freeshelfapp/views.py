@@ -1,12 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from freeshelfapp.models import Category, Author, Book
 from django.views import generic
 
 # Create your views here.
+# def base(request):
+#     """View function for home page of site."""
+#     categories = Category.objects.all()
+#     context = {
+#        'categories': categories,
+#     }
+#     return render(request, 'base_generic.html', context=context)
+
 def index(request):
     """View function for home page of site."""
 
-    # 
     categories = Category.objects.all()
     books = Book.objects.all()
 
@@ -24,3 +31,13 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+class CategoryDetailView(generic.DetailView):
+    """View class for category page of site."""
+    model = Category
+
+class AuthorDetailView(generic.DetailView):
+    """View class for author page of site."""
+    model = Author
+
+

@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Category: {{ category }}</h2>
+<section class="book">
+    {% if category.book_set.all %}
+        {% for book in category.book_set.all %}
+        <section class="title_author">
+            <span class="book_title">
+            <a href="{{ book.url }}">{{ book }}</a>
+            </span>
+            <span class="author">
+            by <a href="{{ book.author.get_absolute_url }}">{{ book.display_author }}</a>
+            </span>
+        </section>
+        <p>{{ book.summary }}</p>
+        <section class="favorite_date">
+            <span class="favorite">Favorited {{ books.count }} times | </span>
+            <span>added {{ book.date_added }} | </span>
+        </section>
+        {% endfor %}
+    {% else %}
+        <p>There are no books in the database</p>
+    {% endif %}
+</section>
+{% endblock %}
