@@ -4,262 +4,67 @@
     /* border-box tells browser to account for any border and padding when specifying an element's width/height */
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans';
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
     max-width: 100%;
 }
 
-body {
-    background-color: rgb(242, 242, 242);
+.main {
+   padding: 1rem 1rem 1rem 1rem;
 }
 
 .title_bar {
-    margin: 2rem 0rem 0rem 2rem;
+    margin: 0rem 1rem;
+    padding: 0rem 1rem;
     background-color: rgb(78, 166, 120);
-    font-family: athelas, georgia, serif; 
+    font-family: Arial, Helvetica, sans-serif;
     color: white;
-}
-
-.title {
-    font-size: 1.5rem;
-}
-
-.nav_main {
-    /* padding: 0rem 0rem 1rem 2rem; */
-    font-size: .75rem;
-    background-color: rgb(242, 242, 242);
-}
-
-.main {
-    background-color: white;
-    padding-top: 2rem;
-}
-
-.category_header {
-    margin: 0rem 0rem 3rem 2rem;
-    font-size: 2rem;
-}
-
-/* ------ homepage.html specific ------- */
-.bio_box {
-    margin: 1rem 2rem 0rem 2rem;
-    padding-bottom: 2rem;
-}
-
-.profile_pic {
-    margin-right: 2rem;
-}
-
-.hello {
-
-}
-
-.name {
-    font-size: 3rem;
-}
-
-.current_title {
-    font-size: 2rem;
-    font-style: italic;
-    color: rgb(23, 62, 115);
-}
-
-.bio_text {
-    margin-top: 1rem;
-    line-height: 2rem;
-    text-align: justify;
-}
-
-/* ------ projectlist.html specific ------- */
-.projects_box {
-    margin: 1rem 2rem 0rem 2rem;
-    padding-bottom: 1rem;
-}
-
-.project_title {
-    font-style: italic;
-    color: rgb(23, 62, 115);
-}
-
-.project_pic {
-    margin-top: 1rem;
-}
-
-.project_summary {
-    line-height: 2rem;
-    text-align: justify;
-}
-
-.nav_projects {
-    margin: 1rem 0rem 2rem 0rem;
-    font-size: .75rem;
-}
-
-/* ------ resume.html specific ------- */
-.resume_box {
-    margin: 1rem 2rem 0rem 2rem;
-    padding-bottom: 1rem;
-}
-
-.my_name {
-    font-style: italic;
-    color: rgb(23, 62, 115);
-    text-align: left;
-    font-size: 2rem;
-}
-
-.address_box {
-    margin-top: .25rem;
-}
-
-.address_item {
-    margin-right: .25rem;
-    font-size: .9rem;
-}
-
-.section_heading {
-    margin-top: 1.5rem;
-    margin-bottom: .5rem;
-    font-family: Oswald;
-}
-
-.skills_box {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.skill {
-    margin: 0rem 1rem 0.25rem 0.5rem;
-    color: rgb(23, 62, 115);
-    font-size:  1.1rem;
-    display: flex;
-}
-
-/* #diamond-skills {
-    margin-top: .35rem;
-    margin-right: .1rem;
-    width: 0;
-    height: 0;
-    border: 3.75px solid transparent;
-    border-bottom: 5.25px solid rgb(23, 62, 115);
-    position: relative;
-    top: -3.75px;
-}
-#diamond-skills:after {
-    content: '';
-    position: absolute;
-    left: -3.75px;
-    top: 5.25px;
-    width: 0;
-    height: 0;
-    border: 3.75px solid transparent;
-    border-top: 5.25px solid rgb(23, 62, 115);
-} */
-
-.employment_box {
-    margin: 0rem 0rem 1.5rem 0.5rem;
-}
-
-.company_box {
-    
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.company_name {
-    font-weight: bold;
+.title {
+    font-size: 2.5rem;
 }
 
-.company_title {
-    font-style: italic;
-    color: rgb(23, 62, 115);
-    margin-top: .25rem;
+.title_nav {
+    font-size: 1.5rem;
+    line-height: 6rem;
 }
 
-.job_details_box {
-    margin: 0rem 0rem 0.5rem 2rem;
-    line-height: 1.5rem;
+.title_nav a, .title a:visited {
+    text-decoration: none;
+    color: white
 }
 
-.job_details_child {
-    margin: 0rem 0rem 0rem 2rem;
+.content {
+    margin: 1rem 1rem 1rem 1rem;
 }
 
-@media screen and (min-width: 768px) {
-    .header {
-        display: flex;
-        flex-wrap: wrap;
-        width: 75rem;
-        margin: 2rem auto 1rem auto;
-        justify-content: space-between;
-    }
 
-    .main {
-        width: 75rem;
-        margin: 0rem auto;
-        background-color: white;
-    }
+.category {
+    margin: 0rem 0rem 2rem 0rem;
+}
 
-    .bio_box {
-        margin: 0rem 2rem;
-        padding: 2rem 0rem;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-end;
-    }
+.book {
+    margin: 1rem 0rem 1rem 0rem;
+}
 
-    .bio_intro {
-        margin-top: 2rem;
-    }
+.title_author {
+    margin: 1.5rem 0rem 1rem 0rem;
+}
 
-    .projects_box {
-        margin: 1rem 0rem 0rem 2rem;
-        display: flex;
-        flex-wrap: wrap;
-    }
+.book_title {
+    font-size: 2rem;
+}
 
-    .project_unit{
-        max-width: 47%;
-        margin-right: 1.5rem;
-    }
+.author {
+    font-size: 1.25rem;
+}
 
-    .my_name {
-        font-style: italic;
-        color: rgb(23, 62, 115);
-        text-align: right;
-        font-size: 2rem;
-    }
-
-    .address_box {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    #diamond-narrow {
-        margin-top: .5rem;
-        width: 0;
-        height: 0;
-        border: 3.75px solid transparent;
-        border-bottom: 5.25px solid black;
-        position: relative;
-        top: -3.75px;
-    }
-    #diamond-narrow:after {
-        content: '';
-        position: absolute;
-        left: -3.75px;
-        top: 5.25px;
-        width: 0;
-        height: 0;
-        border: 3.75px solid transparent;
-        border-top: 5.25px solid black;
-    }
-
-    .company_align_right {
-        text-align: right;
-    }
+.favorite_date {
+    margin: 1rem 0rem 1rem 0rem;
 }

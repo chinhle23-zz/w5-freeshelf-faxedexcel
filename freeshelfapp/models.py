@@ -14,6 +14,9 @@ class Category(models.Model):
     name = models.CharField(max_length=200, help_text='Enter a book category (e.g. Python, HTML, etc.)')
     slug = models.SlugField(unique=True, null=True, blank=True)
 
+    class Meta:
+        ordering = ['name']
+
     def save(self, *args, **kwargs):
         self.set_slug()
         super().save(*args, **kwargs)
@@ -89,7 +92,7 @@ class Book(models.Model):
 
 
     class Meta:
-        ordering = ['date_added',]
+        ordering = ['-date_added',]
 
     def display_category(self):
         """Create a string for the Category. This is required to display category in Admin."""

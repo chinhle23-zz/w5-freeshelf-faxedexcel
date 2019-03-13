@@ -1,14 +1,42 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Mini Blog</h1>
-  <p>Welcome to Mini Blog, a website developed by <em>Chinh Le</em>!</p>
-  <h2>Dynamic content</h2>
-  <p>The mini blog site has the following record counts:</p>
-  <ul>
-    <li><strong>Blogs:</strong> {{ num_blogs }}</li>
-    <li><strong>Bloggers:</strong> {{ num_bloggers }}</li>
-  </ul>
+  <section class="category">
+    <span>Books by category:</span>
+    {% if categories %}
+    <span class="category_nav">
+        {% for category in categories %}
+            <a href="">{{ category }}</a> |
+        {% endfor %}
+    </span>
+    {% else %}
+        <p>There are no categories in the database</p>
+    {% endif %}
+  </section>
+
+  <h2>Recently added books</h2>
+  <section class="book">
+    {% if books %}
+      {% for book in books %}
+        <section class="title_author">
+          <span class="book_title">
+            <a href="{{ book.url }}">{{ book }}</a>
+          </span>
+          <span class="author">
+            by <a href="">{{ book.display_author }}</a>
+          </span>
+        </section>
+        <p>{{ book.summary }}</p>
+        <section class="favorite_date">
+          <span class="favorite">Favorited {{ books.count }} times | </span>
+          <span>added {{ book.date_added }} | </span>
+          <span class="book_category">Category: <a href="">{{ book.display_category }}</a></span>
+        </section>
+      {% endfor %}
+    {% else %}
+      <p>There are no books in the database</p>
+    {% endif %}
+  </section>
 
   <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
 {% endblock %}

@@ -11,19 +11,12 @@
         <section class="main">
             <section class="title_bar">
                 <h1 class="title">Freeshelf</h1>
-                {% block nav %}
+            {% block nav %}
                 <nav class="title_nav">
                     <a href="">Login</a> |
                     <a href="">Register</a>
                 </nav>
-                {% endblock %}
-            </section>
-            <section class="category">
-                <span>Books by category:</span>
-                <nav class="category_nav">
-                    <a href="">Login</a> |
-                    <a href="">Register</a>
-                </nav>
+            {% endblock %}
             </section>
             <section class="content">
                 {% block content %}{% endblock %}
