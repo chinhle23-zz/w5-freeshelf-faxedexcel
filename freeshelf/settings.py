@@ -35,10 +35,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # built-in apss
+    # built-in apps
     'django.contrib.admin',
     'django.contrib.auth',
+        # Core authentication framework and its default models
     'django.contrib.contenttypes',
+        # Django content type system (allows permissions to be associated with models)
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -54,9 +56,11 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+        # Manages sessions across requests
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+        # Associates users with requests using sessions
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -67,7 +71,8 @@ ROOT_URLCONF = 'freeshelf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+            # makes the templates directory visible to the template loader
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,3 +136,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = '/'
+    # Redirect to home URL after login (Default redirects to /accounts/profile/)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # Logs any emails sent to the console (so the password reset link can be copied from the console for testing)

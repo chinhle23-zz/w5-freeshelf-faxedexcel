@@ -40,6 +40,11 @@ img {
     color: white
 }
 
+.username {
+    color: blueviolet;
+    font-weight: bold;
+}
+
 .content {
     margin: 1rem 1rem 1rem 1rem;
 }
