@@ -36,8 +36,22 @@ class CategoryDetailView(generic.DetailView):
     """View class for category page of site."""
     model = Category
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(CategoryDetailView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['categories'] = Category.objects.all()
+        return context
+
 class AuthorDetailView(generic.DetailView):
     """View class for author page of site."""
     model = Author
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(AuthorDetailView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['categories'] = Category.objects.all()
+        return context
 
 

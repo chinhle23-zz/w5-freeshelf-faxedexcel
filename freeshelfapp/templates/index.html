@@ -22,8 +22,11 @@
           <span class="book_title">
             <a href="{{ book.url }}">{{ book }}</a>
           </span>
-          <span class="author">
-            by <a href="">{{ book.display_author }}</a>
+          <span class="author">by
+            {% for author in book.author.all %}
+              <!--'book.author.all' is used instead of 'book.author_set.all' is used here b/c the ManyToMany declaration was done in the Book class definition-->
+              <a href="{{ author.get_absolute_url }}">{{ author }}</a>,
+            {% endfor %}
           </span>
         </section>
         <p>{{ book.summary }}</p>
@@ -31,8 +34,9 @@
           <span class="favorite">Favorited {{ books.count }} times | </span>
           <span>added {{ book.date_added }} | </span>
           <span class="book_category">Category: 
-            {% for category in book.category_set.all %}
-              <a href="{{ category.get_absolute_url }}">{{ category }}</a> |
+            {% for category in book.category.all %}
+              <!--'book.category.all' is used instead of 'book.category_set.all' is used here b/c the ManyToMany declaration was done in the Book class definition-->
+              <a href="{{ category.get_absolute_url }}">{{ category }}</a>,
             {% endfor %}
           </span>
         </section>

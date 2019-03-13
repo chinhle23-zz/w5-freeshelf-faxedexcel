@@ -1,7 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-
+<section class="category">
+    <span>Books by category:</span>
+    {% if categories %}
+        <span class="category_nav">
+            {% for category in categories %}
+                <a href="{{ category.get_absolute_url }}">{{ category }}</a> |
+            {% endfor %}
+        </span>
+    {% else %}
+        <p>There are no categories in the database</p>
+    {% endif %}
+</section>
+<h2>Author: {{ author }}</h2>
 <section class="book">
     {% if author.book_set.all %}
         {% for book in author.book_set.all %}
@@ -14,12 +26,16 @@
         <section class="favorite_date">
             <span class="favorite">Favorited {{ books.count }} times | </span>
             <span>added {{ book.date_added }} | </span>
-            <span class="book_category">Category: <a href="{{ category.get_absolute_url }}">{{ book.display_category }}</a></span>
+            <span class="book_category">Category: 
+                {% for category in book.category.all %}
+                    <!--'book.category.all' is used instead of 'book.category_set.all' is used here b/c the ManyToMany declaration was done in the Book class definition-->
+                    <a href="{{ category.get_absolute_url }}">{{ category }}</a>,
+                {% endfor %}
+            </span>
         </section>
         {% endfor %}
     {% else %}
         <p>There are no books in the database</p>
     {% endif %}
 </section>
-
 {% endblock %}
