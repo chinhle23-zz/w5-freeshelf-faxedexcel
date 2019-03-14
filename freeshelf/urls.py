@@ -29,7 +29,7 @@ urlpatterns = [
     path('accounts/', include('registration.backends.default.urls')),
         # URL patterns for the views in django-registration-redux
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     # allows us to use CSS files in the static directory
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # allows us to use uploaded images
