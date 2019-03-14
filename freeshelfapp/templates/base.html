@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Freeshelf</title>
+        <title>Freeshelf {% block title %}Register{% endblock %}</title>
+            {# '{% block title %}...{% endblock %}' required for Django-registration-redux #}
         <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
 
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+        {% block meta %}{% endblock %} <!--required for Django-registration-redux-->
     </head>
     <body>
         <section class="main">
@@ -18,8 +21,8 @@
                         <a href="{% url 'logout'%}?next={{request.path}}">Logout</a> |
                         <span class="username">User: {{ user.get_username }}</span>
                     {% else %}
-                        <a href="{% url 'login' %}">Login</a> |
-                        <a href="">Register</a>
+                        <a href="{% url 'auth_login' %}">Login</a> |
+                        <a href="{% url 'registration_register' %}">Register</a>
                     {% endif %}
                 </nav>
             {% endblock %}

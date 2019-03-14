@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('category/<slug:slug>', views.CategoryDetailView.as_view(), name='category-detail'),
     path('author/<slug:slug>', views.AuthorDetailView.as_view(), name='author-detail'),
+    # path('registration/', views.registration, name='registration'),
 ]

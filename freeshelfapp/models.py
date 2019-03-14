@@ -70,7 +70,7 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.name
-
+      
 class Book(models.Model):
     """Model representing a book (but not a specific copy of a book)."""
     title = models.CharField(max_length=200)
@@ -121,3 +121,16 @@ class Book(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+        # https://docs.djangoproject.com/en/2.1/ref/models/fields/#foreign-key-arguments
+        # Foreign Key used b/c a user can only favorite a book once, but a user can have many book favorites
+        # 'User' model class argument is declared to connect the relationship between the 'Favorite' and 'User' classes
+        # 'on_delete=models.CASCADE' argument deletes the object containing the ForeignKey, thus deletes the instance of the 'Favorite' if 'User' is deleted
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+        # Foreign Key used b/c a favorite can only be on one book, but a book can have many favorites
+    favorited_at = models.DateTimeField(auto_now_add=True)
+        # https://docs.djangoproject.com/en/2.1/ref/models/fields/
+        # 'auto_now_add=True' automatically set the field to now when the object is first created
+        # useful for creation of timestamps

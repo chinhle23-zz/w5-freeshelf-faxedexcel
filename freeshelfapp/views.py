@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from freeshelfapp.models import Category, Author, Book
 from django.views import generic
+from freeshelfapp.forms import RegisterForm
 
 # Create your views here.
 # def base(request):
@@ -54,4 +55,16 @@ class AuthorDetailView(generic.DetailView):
         context['categories'] = Category.objects.all()
         return context
 
+def registration(request):
+    """View function for registration page of site."""
 
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = RegisterForm(request.POST)
+
+    
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'index.html', context=context)

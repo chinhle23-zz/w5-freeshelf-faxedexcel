@@ -23,9 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('freeshelfapp/', include('freeshelfapp.urls')),
     path('', RedirectView.as_view(url='/freeshelfapp/', permanent=True)),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
         # authentication paths placed here in case we have multiple applications across the whole site
         # these URLs expect to find their associated templates in a directory '/registration/' somewhere in the templates search path
+    path('accounts/', include('registration.backends.default.urls')),
+        # URL patterns for the views in django-registration-redux
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     # allows us to use CSS files in the static directory

@@ -1,8 +1,11 @@
 {# This page is needed b/c by default the user will be taken to the Amin logout page after loggin out #}
 
-{% extends "base_generic.html" %}
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Logged out" %}{% endblock %}
 
 {% block content %}
-    <p>Logged out!</p>  
-    <a href="{% url 'login' %}">Click here to login again.</a>
+<p>{% trans "Successfully logged out" %}.</p>
+<a href="{% url 'login' %}">Click here to login again.</a>
 {% endblock %}

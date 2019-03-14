@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,6 +36,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 3rd-party apps that should come before 'django.contrib.admin'
+    'registration',
+
     # built-in apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+        # added 3/1/19 for django-registration-redux
 
     # my apps
     # 'freeshelfapp.apps.FreeshelfappConfig', # MDN tutorial way and it works
@@ -51,6 +57,7 @@ INSTALLED_APPS = [
 
     # 3rd-party apps
     'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -123,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York' # default 'UTC'
 
 USE_I18N = True
 
@@ -134,11 +141,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
 
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 7
+    # One-week activation window
 LOGIN_REDIRECT_URL = '/'
     # Redirect to home URL after login (Default redirects to /accounts/profile/)
 
+# Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # Logs any emails sent to the console (so the password reset link can be copied from the console for testing)
+
+django_heroku.settings(locals())
+    # locals returns a dictionary of all your local variables
