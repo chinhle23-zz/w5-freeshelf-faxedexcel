@@ -18,7 +18,7 @@
                 <nav class="title_nav">
                     <a href="{% url 'index' %}">Home</a> |
                     {% if user.is_authenticated %}
-                        <a href="{% url 'logout'%}?next={{request.path}}">Logout</a> |
+                        <a href="{% url 'auth_logout' %}">Logout</a> |
                         <span class="username">User: {{ user.get_username }}</span>
                     {% else %}
                         <a href="{% url 'auth_login' %}">Login</a> |
