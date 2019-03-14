@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-        # added 3/1/19 for django-registration-redux
+    # 'django.contrib.sites',
+        # added 3/14/19 for django-registration-redux
+        # this broke my login site, so commented it out and it worked
 
     # my apps
     # 'freeshelfapp.apps.FreeshelfappConfig', # MDN tutorial way and it works
@@ -153,5 +154,5 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # Logs any emails sent to the console (so the password reset link can be copied from the console for testing)
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
     # locals returns a dictionary of all your local variables
