@@ -5,7 +5,7 @@ from freeshelfapp.forms import RegisterForm
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-# from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 # def base(request):
@@ -85,6 +85,7 @@ def book_favorite_view(request, book_pk):
     book = get_object_or_404(Book, pk=book_pk)
         # 'get_object_or_404()' function takes a Django model as its first argument and an arbitrary number of keyword arguments, which it passes to the 'get()' function of the model's manager
         # It raises 'Http404' if the object does not exist
+    next = request.POST.get('next', '/')
 
     favorite, created = request.user.favorite_set.get_or_create(book=book)
         # '.get_or_created()' function returns a tuple of (object, created), where 'object' is the retrieved or created object and 'created' is a boolean specifying whether a new object was created
@@ -100,7 +101,7 @@ def book_favorite_view(request, book_pk):
         favorite.delete()
             # deletes the favorite object
 
-    return redirect(book.get_absolute_url())
-    # return HttpResponseRedirect(request.path_info)
+    # return redirect(book.get_absolute_url())
+    return HttpResponseRedirect(next)
 
 

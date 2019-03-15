@@ -35,6 +35,11 @@
             {% if request.user.is_authenticated %}
               <form class="button_inline" action="{% url 'book_favorite' book_pk=book.pk %}" method="POST">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                  <!--https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input-->
+                  <!--"hidden" type is a control that is not displayed but whose value is submitted to the server-->
+                  <!--"next" name is used in the 'book_favorite_view' view function definition-->
+                  <!--"{{ request.path }}" value is the current path that the user will be redirected to after the button defined below is pressed-->
                 {% if book in request.user.favorite_books.all %}
                   <!--'favorite_books' is the related name of the ManyToManyField 'favorited_by' declared in the Book model-->
                   <button class="unfavorite_button" type="submit">Unfavorite this book</button>
