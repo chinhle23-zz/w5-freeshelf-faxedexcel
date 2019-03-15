@@ -90,6 +90,11 @@ class Book(models.Model):
     picture = models.ImageField(upload_to='books/', null=True, blank=True)
         # https://docs.djangoproject.com/en/2.1/ref/models/fields/
 
+    favorited_by = models.ManyToManyField(to=User, related_name='favorite_books', through='Favorite')
+        # ManyToManyField used b/c users can favorite many books and books can have many user favorites
+        # 'through' option allows an intermediate table to be specified
+        # https://docs.djangoproject.com/en/2.1/ref/models/fields/#field-types
+
 
     class Meta:
         ordering = ['-date_added',]
@@ -120,7 +125,7 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""
-        return reverse('book-detail', args=[str(self.id)])
+        return reverse('index')
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

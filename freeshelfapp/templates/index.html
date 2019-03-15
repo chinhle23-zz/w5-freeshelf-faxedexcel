@@ -31,9 +31,22 @@
         </section>
         <p>{{ book.summary }}</p>
         <section class="favorite_date">
-          <span class="favorite">Favorited {{ books.count }} times | </span>
-          <span>added {{ book.date_added }} | </span>
-          <span class="book_category">Category: 
+          <span>
+            {% if request.user.is_authenticated %}
+              <form class="button_inline" action="{% url 'book_favorite' book_pk=book.pk %}" method="POST">
+                {% csrf_token %}
+                {% if book in request.user.favorite_books.all %}
+                  <!--'favorite_books' is the related name of the ManyToManyField 'favorited_by' declared in the Book model-->
+                  <button class="unfavorite_button" type="submit">Unfavorite this book</button>
+                {% else %}
+                  <button class="favorite_button" type="submit">Favorite this book</button>
+                {% endif %}
+              </form>
+            {% endif %}          
+          </span>
+          <span class="book_info">Favorited {{ book.favorite_set.count }} time(s) | </span>
+          <span class="book_info">added {{ book.date_added }} | </span>
+          <span class="book_info">Category: 
             {% for category in book.category.all %}
               <!--'book.category.all' is used instead of 'book.category_set.all' is used here b/c the ManyToMany declaration was done in the Book class definition-->
               <a href="{{ category.get_absolute_url }}">{{ category }}</a>,
@@ -46,5 +59,5 @@
     {% endif %}
   </section>
 
-  <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+  <!-- <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p> -->
 {% endblock %}

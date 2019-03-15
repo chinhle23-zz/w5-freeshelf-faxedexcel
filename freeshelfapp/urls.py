@@ -7,4 +7,5 @@ urlpatterns = [
     path('category/<slug:slug>', views.CategoryDetailView.as_view(), name='category-detail'),
     path('author/<slug:slug>', views.AuthorDetailView.as_view(), name='author-detail'),
     # path('registration/', views.registration, name='registration'),
+    path('books/<int:book_pk>/favorite/', views.book_favorite_view, name="book_favorite"),
 ]

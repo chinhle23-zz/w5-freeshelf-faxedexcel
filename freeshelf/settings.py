@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.contrib.messages import constants as messages
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -153,6 +154,13 @@ LOGIN_REDIRECT_URL = '/'
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # Logs any emails sent to the console (so the password reset link can be copied from the console for testing)
+
+# Messages
+MESSAGE_TAGS = {
+    messages.INFO: 'b--blue bg-light-blue',    
+    messages.SUCCESS: 'b--green bg-light-green'
+        # styles messages used through-out the project
+}
 
 django_heroku.settings(locals())
     # locals returns a dictionary of all your local variables
