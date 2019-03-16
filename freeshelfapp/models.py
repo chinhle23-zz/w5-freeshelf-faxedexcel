@@ -113,9 +113,19 @@ class Book(models.Model):
         """Create a string for the Category. This is required to display category in Admin."""
         return ', '.join(author.name for author in self.author.all()[:3])
             # str.join(iterable) --> https://docs.python.org/3.7/library/stdtypes.html?highlight=join#str.join
-            # 1st three '[:3]' category items in the 'self.category.all()' for a 'Book' object will be joined separated by a comma ', '
+            # 1st three '[:3]' author items in the 'self.author.all()' for a 'Book' object will be joined separated by a comma ', '
 
     display_author.short_description = 'author'
+        # '.short_description' is a built-in Django attribute to provide human-readable descriptions for callback functions
+        # https://docs.djangoproject.com/en/2.1/ref/contrib/admin/actions/
+        
+    def display_favorited_by(self):
+        """Create a string for the Category. This is required to display category in Admin."""
+        return ', '.join(favorited_by.username for favorited_by in self.favorited_by.all()[:3])
+            # str.join(iterable) --> https://docs.python.org/3.7/library/stdtypes.html?highlight=join#str.join
+            # 1st three '[:3]' favorited_by items in the 'self.favorited_by.all()' for a 'Book' object will be joined separated by a comma ', '
+
+    display_favorited_by.short_description = 'favorited_by_user'
         # '.short_description' is a built-in Django attribute to provide human-readable descriptions for callback functions
         # https://docs.djangoproject.com/en/2.1/ref/contrib/admin/actions/
 

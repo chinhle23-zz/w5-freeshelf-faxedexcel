@@ -34,6 +34,9 @@
           <span>
             {% if request.user.is_authenticated %}
               <form class="button_inline" action="{% url 'book_favorite' book_pk=book.pk %}" method="POST">
+                <!--https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form-->
+                <!--"{% url 'book_favorite' book_pk=book.pk %}" action is the URI (Uniform Resource Identifier) of a program that processes the form information-->
+                <!--"POST" method used so that form data are included in the body of the form and sent to the server-->
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
                   <!--https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input-->

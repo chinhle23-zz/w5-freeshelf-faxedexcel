@@ -86,6 +86,10 @@ def book_favorite_view(request, book_pk):
         # 'get_object_or_404()' function takes a Django model as its first argument and an arbitrary number of keyword arguments, which it passes to the 'get()' function of the model's manager
         # It raises 'Http404' if the object does not exist
     next = request.POST.get('next', '/')
+        # https://docs.djangoproject.com/en/2.1/ref/request-response/
+        # 'request' is just an object of the 'HttpRequest' class
+        # '.POST' is a dictionary-like object containing all given HTTP POST paramenters, providing that the request contains form data
+        # '.get(key, default=None)' returns the 'next' key, but will return '/' (home page) if 'next' key does not exist
 
     favorite, created = request.user.favorite_set.get_or_create(book=book)
         # '.get_or_created()' function returns a tuple of (object, created), where 'object' is the retrieved or created object and 'created' is a boolean specifying whether a new object was created
@@ -101,7 +105,7 @@ def book_favorite_view(request, book_pk):
         favorite.delete()
             # deletes the favorite object
 
-    # return redirect(book.get_absolute_url())
     return HttpResponseRedirect(next)
+        # redirects back to the current page
 
 

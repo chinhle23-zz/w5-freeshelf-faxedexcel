@@ -150,6 +150,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
     # One-week activation window
 LOGIN_REDIRECT_URL = '/'
     # Redirect to home URL after login (Default redirects to /accounts/profile/)
+ACCOUNT_AUTHENTICATED_REGISTRATION_REDIRECTS = True
 
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
