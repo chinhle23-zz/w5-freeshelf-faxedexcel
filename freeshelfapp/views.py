@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from freeshelfapp.models import Category, Author, Book
+from freeshelfapp.models import Category, Author, Book, Favorite
 from django.views import generic
 from freeshelfapp.forms import RegisterForm
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 # Create your views here.
 # def base(request):
@@ -59,6 +60,7 @@ class AuthorDetailView(generic.DetailView):
         context['categories'] = Category.objects.all()
         return context
 
+
 # I don't know how to define this myself, so I will let Django-registration-redux do this for me
 # def registration(request):
 #     """View function for registration page of site."""
@@ -71,8 +73,6 @@ class AuthorDetailView(generic.DetailView):
 
 #     # Render the HTML template index.html with the data in the context variable
 #     return render(request, 'index.html', context=context)
-
-
 
 
 @require_http_methods(['POST'])
@@ -107,5 +107,22 @@ def book_favorite_view(request, book_pk):
 
     return HttpResponseRedirect(next)
         # redirects back to the current page
+
+class FavoritedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    """View class for user's favorites list page of site."""
+    model = Favorite
+    template_name ='freeshelfapp/favorite_list_user.html'
+        # 'template_name' declared, rather than useing the default, b/c we may end up having a few different lists of Favorite records, with different views and templates
+    def get_queryset(self):
+        return Favorite.objects.filter(user=self.request.user).order_by('-favorited_at')
+        # 'get_queryset()' re-implemented to restrict our query to just the 'Favorite' objects for the current user
+        # Note: we order by the 'favorited_at' date so that the newest items are displayed first
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(FavoritedBooksByUserListView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['categories'] = Category.objects.all()
+        return context
 
 

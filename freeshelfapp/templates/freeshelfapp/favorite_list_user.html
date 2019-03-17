@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="category">
+    <span>Books by category:</span>
+    <hr/>
+    {% if categories %}
+        {% for category in categories %}
+            <p class="category_nav">
+                <a href="{{ category.get_absolute_url }}">{{ category }}</a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>There are no categories in the database</p>
+    {% endif %}
+</section>
+<section class="book">
+    <h2>{{ request.user }}'s Favorites</h2>
+    {% if favorite_list %}
+        {% for favorite in favorite_list %}
+            <section class="title_author">
+                <span class="book_title">
+                <a href="{{ favorite.book.url }}">{{ favorite.book }}</a>
+                </span>
+                <span class="author"> by
+                    {% for author in favorite.book.author.all %}
+                        <!--'book.author.all' is used instead of 'book.author_set.all' is used here b/c the ManyToMany declaration was done in the Book class definition-->
+                        <a href="{{ author.get_absolute_url }}">{{ author }}</a>,
+                    {% endfor %}
+                </span>
+            </section>
+            <p>{{ favorite.book.summary }}</p>
+            <section class="favorite_date">
+                <span>
+                    {% if request.user.is_authenticated %}
+                    <form class="button_inline" action="{% url 'book_favorite' book_pk=favorite.book.pk %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        {% if favorite.book in request.user.favorite_books.all %}
+                            <!--'favorite_books' is the related name of the ManyToManyField 'favorited_by' declared in the Book model-->
+                            <button class="unfavorite_button" type="submit">Unfavorite this book</button>
+                        {% else %}
+                            <button class="favorite_button" type="submit">Favorite this book</button>
+                        {% endif %}
+                    </form>
+                    {% endif %}          
+                </span>
+                <span class="book_info">Favorited {{ favorite.book.favorite_set.count }} time(s) | </span>
+                <span class="book_info">added {{ favorite.book.date_added }} | </span>
+                <span class="book_info">Category: 
+                    {% for category in favorite.book.category.all %}
+                        <!--'book.category.all' is used instead of 'book.category_set.all' is used here b/c the ManyToMany declaration was done in the Book class definition-->
+                        <a href="{{ category.get_absolute_url }}">{{ category }}</a>,
+                    {% endfor %}
+                </span>
+            </section>
+        {% endfor %}
+    {% else %}
+        <p>There are no favorited books in the database</p>
+    {% endif %}
+</section>
+{% endblock %}

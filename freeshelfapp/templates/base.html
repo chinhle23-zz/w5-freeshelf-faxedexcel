@@ -19,7 +19,8 @@
                     <a href="{% url 'index' %}">Home</a> |
                     {% if user.is_authenticated %}
                         <a href="{% url 'auth_logout' %}">Logout</a> |
-                        <span class="username">User: {{ user.get_username }}</span>
+                        <span class="username">User: {{ user.get_username }}</span> |
+                        <a href="{% url 'my-favorites' %}"> Favorites </a>
                     {% else %}
                         <a href="{% url 'auth_login' %}">Login</a> |
                         <a href="{% url 'registration_register' %}">Register</a>
