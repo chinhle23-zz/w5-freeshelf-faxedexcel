@@ -80,7 +80,7 @@ class Book(models.Model):
 
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
     
-    date_added = models.DateField(null=True, blank=True)
+    date_added = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # ManyToManyField used because category can contain many books. Books can cover many categories.
     # category class has already been defined so we can specify the object above.
